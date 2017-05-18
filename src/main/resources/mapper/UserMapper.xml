@@ -6,7 +6,7 @@
              
  
          <insert id="insertUser" parameterType="User" keyProperty="id">
-             insert into days_user( id, 
+             insert into user_inf( id,
          state,
          nickname) 
          values 
