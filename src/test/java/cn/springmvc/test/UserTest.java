@@ -2,6 +2,8 @@ package cn.springmvc.test;
 
 import java.awt.List;
 
+import cn.springmvc.dao.DeptMapper;
+import cn.springmvc.model.Dept;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +25,8 @@ public class UserTest {
     @Resource
 	private UserService userService;
 
-
+    @Resource
+    private DeptMapper deptMapper;
 	/*@Before
     public void before(){
 
@@ -41,5 +44,6 @@ public class UserTest {
         userService.insertUser(user);
 
     }
+
 
 }
