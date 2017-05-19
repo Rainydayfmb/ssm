@@ -1,6 +1,9 @@
 package cn.springmvc.dao;
 
 import cn.springmvc.model.Dept;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface DeptMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +17,6 @@ public interface DeptMapper {
     int updateByPrimaryKeySelective(Dept record);
 
     int updateByPrimaryKey(Dept record);
+
+    List<Dept> selectByPage(@Param("name") String name);
 }

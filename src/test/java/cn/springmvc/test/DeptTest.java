@@ -2,6 +2,7 @@ package cn.springmvc.test;
 
 import cn.springmvc.dao.DeptMapper;
 import cn.springmvc.model.Dept;
+import cn.springmvc.service.DeptService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -15,11 +16,15 @@ import javax.annotation.Resource;
  * @Date: 2017/5/18 0:17
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:conf/spring-mybatis.xml")
+@ContextConfiguration(locations = {
+        "classpath:conf/spring.xml","classpath:conf/spring-mybatis.xml"})
 public class DeptTest {
 
     @Resource
     DeptMapper deptMapper;
+
+    @Resource
+    DeptService deptService;
 
     @Test
     public void testinsertTest(){
@@ -37,6 +42,18 @@ public class DeptTest {
         dept.setRemark("bbb");
         dept.setId(12);
         deptMapper.insert(dept);
+
+    }
+
+    @Test
+    public void selectDeptByPage(){
+        System.out.println(deptMapper.selectByPage("技术部"));
+
+    }
+
+    @Test
+    public void selectDeptByPageService(){
+        System.out.println(deptService.findDept("",1,4));
 
     }
 }
