@@ -3,6 +3,8 @@ package cn.springmvc.dao;
 import cn.springmvc.model.User;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -19,4 +21,6 @@ public interface UserMapper {
     User selectByLoginnameAndPassword(
             @Param("loginName") String loginname,
             @Param("passWord") String password);
+
+    List<User> selectByPage(@Param("name") String name);
 }

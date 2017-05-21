@@ -3,11 +3,10 @@ package cn.springmvc.controller;
 import cn.springmvc.common.HrmConstants;
 import cn.springmvc.model.User;
 import cn.springmvc.service.UserService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -36,11 +35,23 @@ public class UserController {
             mv.setViewName("redirect:/main");
         }else{
             // 设置登录失败提示信息
-            mv.addObject("message", "登录名或密码错误!请重新输入");
+            mv.addObject("message", "Loginname or password is wrong!");
             System.out.println("登陆失败");
             // 服务器内部跳转到登录页面
             mv.setViewName("forward:/loginForm");
         }
         return mv;
+    }
+
+    @RequestMapping(value="/user/selectUser")
+    public String selectUser(Integer page,
+                             Integer pageSize,
+                             @ModelAttribute User user,
+                             Model model){
+        System.out.println("user = " + user);
+        PageInfo<User> p=userService.findDept(user.getLoginname(),page,pageSize);
+        model.addAttribute("page",p );
+        return "user/user";
+
     }
 }

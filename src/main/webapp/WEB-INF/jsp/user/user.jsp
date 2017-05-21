@@ -109,7 +109,7 @@
 			  <td>创建时间</td>
 			  <td align="center">操作</td>
 			</tr>
-			<c:forEach items="${requestScope.users}" var="user" varStatus="stat">
+			<c:forEach items="${requestScope.page}" var="user" varStatus="stat">
 				<tr id="data_${stat.index}" align="center" class="main_trbg" onMouseOver="move(this);" onMouseOut="out(this);">
 					<td><input type="checkbox" id="box_${stat.index}" value="${user.id}"></td>
 					 <td>${user.loginname }</td>
@@ -129,9 +129,9 @@
 	  <!-- 分页标签 -->
 	  <tr valign="top"><td align="center" class="font3">
 	  	 <fkjava:pager
-	  	        pageIndex="${requestScope.pageModel.pageIndex}" 
-	  	        pageSize="${requestScope.pageModel.pageSize}" 
-	  	        recordCount="${requestScope.pageModel.recordCount}" 
+	  	        pageIndex="${requestScope.page.pageNum}"
+	  	        pageSize="${requestScope.page.pageSize}"
+	  	        recordCount="${requestScope.page.total}"
 	  	        style="digg"
 	  	        submitUrl="${ctx}/user/selectUser?pageIndex={0}"/>
 	  </td></tr>

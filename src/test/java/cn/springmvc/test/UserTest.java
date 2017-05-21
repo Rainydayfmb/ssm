@@ -36,4 +36,9 @@ public class UserTest {
 
     }
 
+    @Test
+    public void selectDeptByPageService(){
+        System.out.println(userService.findDept("",1,4));
+    }
+
 }
