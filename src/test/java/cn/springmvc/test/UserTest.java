@@ -3,6 +3,7 @@ package cn.springmvc.test;
 import cn.springmvc.dao.DeptMapper;
 import cn.springmvc.dao.UserMapper;
 import cn.springmvc.model.User;
+import com.github.pagehelper.PageInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -38,7 +39,11 @@ public class UserTest {
 
     @Test
     public void selectDeptByPageService(){
-        System.out.println(userService.findDept("",1,4));
+        PageInfo<User> PI=userService.findUser("",2,2);
+        for(User user:PI.getList()){
+            System.out.println(user);
+        }
+        //System.out.println(userService.findUser("",2,2));
     }
 
 }
