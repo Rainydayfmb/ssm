@@ -6,6 +6,7 @@ import cn.springmvc.service.UserService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -47,10 +48,17 @@ public class UserController {
     public String selectUser(Integer page,
                              Integer pageSize,
                              @ModelAttribute User user,
-                             Model model){
+                             ModelMap map){
         System.out.println("user = " + user);
-        PageInfo<User> p=userService.findDept(user.getLoginname(),page,pageSize);
-        model.addAttribute("page",p );
+        PageInfo<User> p=null;
+        page=page==null?1:page;
+        pageSize=pageSize==null?1:page;
+        if(user.getLoginname()==null){
+             p=userService.findUser("",page,pageSize);
+        }else{
+             p=userService.findUser(user.getLoginname(),page,pageSize);
+        }
+        map.addAttribute("page",p);
         return "user/user";
 
     }
