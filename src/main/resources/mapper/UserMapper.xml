@@ -32,7 +32,7 @@
     select
     <include refid="Base_Column_List" />
     from user_inf
-    where name LIKE BINARY concat(concat('%',#{name}),'%')
+    where userName LIKE BINARY concat(concat('%',#{name}),'%')
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
