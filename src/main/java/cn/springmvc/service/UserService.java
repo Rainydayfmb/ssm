@@ -10,5 +10,5 @@ public interface UserService {
 
 	User login(String loginname,String password);
 
-	PageInfo<User> findUser(String name, int pageNum, int PageSize);
+	PageInfo<User> findUser(String name, Integer status, int pageNum, int PageSize);
 }

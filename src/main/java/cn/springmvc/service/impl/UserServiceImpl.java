@@ -29,9 +29,9 @@ public class UserServiceImpl implements  UserService{
     }
 
     @Override
-    public PageInfo<User> findUser(String name, int pageNum, int pageSize) {
+    public PageInfo<User> findUser(String name, Integer status, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        List<User> list=userMapper.selectByPage(name);
+        List<User> list=userMapper.selectByPage(name,status);
         PageInfo<User> pi=new PageInfo<User>(list);
         return pi;
     }

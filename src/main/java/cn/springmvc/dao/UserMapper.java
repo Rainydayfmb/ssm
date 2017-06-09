@@ -22,5 +22,5 @@ public interface UserMapper {
             @Param("loginName") String loginname,
             @Param("passWord") String password);
 
-    List<User> selectByPage(@Param("name") String name);
+    List<User> selectByPage(@Param("userName") String userName,@Param("status") Integer status);
 }

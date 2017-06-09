@@ -39,7 +39,7 @@ public class UserTest {
 
     @Test
     public void selectDeptByPageService(){
-        PageInfo<User> PI=userService.findUser("",2,2);
+        PageInfo<User> PI=userService.findUser("",0,2,2);
         for(User user:PI.getList()){
             System.out.println(user);
         }
