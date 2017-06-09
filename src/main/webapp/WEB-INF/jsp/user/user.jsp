@@ -24,6 +24,12 @@
 	<link href="${ctx}/css/pager.css" type="text/css" rel="stylesheet" />
 	
 	<script type="text/javascript">
+	     $(document).ready(function() {
+            });
+            function queryAllPerson(pageNum, pageSize) {
+                window.location.href='/user/selectUser?page=' + pageNum + '&pageSize=' + pageSize;
+            }
+
 		$(function(){
 	 	   /** 获取上一次选中的部门数据 */
 	 	   var boxs  = $("input[type='checkbox'][id^='box_']");
@@ -98,42 +104,37 @@
 	  
 	  <!-- 数据展示区 -->
 	  <tr valign="top">
-	    <td height="20">
-		  <table width="100%" border="1" cellpadding="5" cellspacing="0" style="border:#c2c6cc 1px solid; border-collapse:collapse;">
-		    <tr class="main_trbg_tit" align="center">
-			  <td><input type="checkbox" name="checkAll" id="checkAll"></td>
-			  <td>登录名</td>
-			  <td>密码</td>
-			  <td>用户名</td>
-			  <td>状态</td>
-			  <td>创建时间</td>
-			  <td align="center">操作</td>
-			</tr>
-			<c:forEach items="${requestScope.page}" var="user" varStatus="stat">
-				<tr id="data_${stat.index}" align="center" class="main_trbg" onMouseOver="move(this);" onMouseOut="out(this);">
-					<td><input type="checkbox" id="box_${stat.index}" value="${user.id}"></td>
-					 <td>${user.loginname }</td>
-					  <td>${user.password }</td>
-					  <td>${user.username }</td>
-					  <td>${user.status }</td>
-					  <td><f:formatDate value="${user.createDate}" 
-								type="date" dateStyle="long"/></td>
-					 <td align="center" width="40px;"><a href="${ctx}/user/updateUser?flag=1&id=${user.id}">
-							<img title="修改" src="${ctx}/images/update.gif"/></a>
-					  </td>
-				</tr>
-			</c:forEach>
-		  </table>
-		</td>
+        <td height="20">
+          <table width="100%" border="1" cellpadding="5" cellspacing="0" style="border:#c2c6cc 1px solid; border-collapse:collapse;">
+            <tr class="main_trbg_tit" align="center">
+              <td><input type="checkbox" name="checkAll" id="checkAll"></td>
+              <td>登录名</td>
+              <td>密码</td>
+              <td>用户名</td>
+              <td>状态</td>
+              <td>创建时间</td>
+              <td align="center">操作</td>
+            </tr>
+            <c:forEach items="${pagehelper.list}" var="user" varStatus="stat">
+                <tr id="data_${stat.index}" align="center" class="main_trbg" onMouseOver="move(this);" onMouseOut="out(this);">
+                    <td><input type="checkbox" id="box_${stat.index}" value="${user.id}"></td>
+                     <td>${user.loginname }</td>
+                      <td>${user.password }</td>
+                      <td>${user.username }</td>
+                      <td>${user.status }</td>
+                      <td><f:formatDate value="${user.createddate}"
+                                type="date" dateStyle="long"/></td>
+                      <td align="center" width="40px;"><a href="${ctx}/user/updateUser?flag=1&id=${user.id}">
+                            <img title="修改" src="${ctx}/images/update.gif"/></a>
+                      </td>
+                </tr>
+            </c:forEach>
+          </table>
+        </td>
 	  </tr>
 	  <!-- 分页标签 -->
 	  <tr valign="top"><td align="center" class="font3">
-	  	 <fkjava:pager
-	  	        pageIndex="${requestScope.page.pageNum}"
-	  	        pageSize="${requestScope.page.pageSize}"
-	  	        recordCount="${requestScope.page.total}"
-	  	        style="digg"
-	  	        submitUrl="${ctx}/user/selectUser?pageIndex={0}"/>
+            <%@ include file="/WEB-INF/jsp/pagehelper.jsp"%>
 	  </td></tr>
 	</table>
 	<div style="height:10px;"></div>

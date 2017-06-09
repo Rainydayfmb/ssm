@@ -52,13 +52,14 @@ public class UserController {
         System.out.println("user = " + user);
         PageInfo<User> p=null;
         page=page==null?1:page;
-        pageSize=pageSize==null?1:page;
+        pageSize=pageSize==null?4:pageSize;
         if(user.getLoginname()==null){
              p=userService.findUser("",page,pageSize);
         }else{
              p=userService.findUser(user.getLoginname(),page,pageSize);
         }
-        map.addAttribute("page",p);
+        map.put("users",p.getList());
+        map.put("pagehelper",p);
         return "user/user";
 
     }
