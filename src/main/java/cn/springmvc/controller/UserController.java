@@ -106,4 +106,22 @@ public class UserController {
         // 返回ModelAndView
         return mv;
     }
+
+    @RequestMapping(value="/user/addUser")
+    public ModelAndView addUser(
+            String flag,
+            @ModelAttribute User user,
+            ModelAndView mv){
+        if(flag.equals("1")){
+            // 设置跳转到添加页面
+            mv.setViewName("user/showAddUser");
+        }else{
+            // 执行添加操作
+            userService.addUser(user);
+            // 设置客户端跳转到查询请求
+            mv.setViewName("redirect:/user/selectUser");
+        }
+        // 返回
+        return mv;
+    }
 }
