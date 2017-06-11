@@ -14,5 +14,13 @@ public interface DeptService {
      * 获得所有部门，分页查询
      * @return Dept对象的List集合
      * */
-    PageInfo<Dept> findDept(String name,int pageNum,int PageSize);
+    PageInfo<Dept> findDept(Dept dept,int pageNum,int PageSize);
+
+    void removeUserById(Integer id);
+
+    Dept findDeptById(Integer id);
+
+    void updateDept(Dept dept);
+
+    void addDept(Dept dept);
 }

@@ -26,7 +26,7 @@
 	<script type="text/javascript">
 	     $(document).ready(function() {
             });
-            function queryAllPerson(pageNum, pageSize) {
+            function queryAll(pageNum, pageSize) {
                 window.location.href='/user/selectUser?page=' + pageNum + '&pageSize=' + pageSize;
             }
 

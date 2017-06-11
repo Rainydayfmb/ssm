@@ -19,4 +19,10 @@ public interface DeptMapper {
     int updateByPrimaryKey(Dept record);
 
     List<Dept> selectByPage(@Param("name") String name);
+
+    void deleteById(Integer id);
+
+    Dept selectById(Integer id);
+
+    void updateDept(Dept dept);
 }

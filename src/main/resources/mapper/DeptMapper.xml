@@ -11,7 +11,8 @@
   <sql id="Base_Column_List" >
     id, name, remark
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from dept_inf
@@ -22,13 +23,18 @@
     select
     <include refid="Base_Column_List" />
     from dept_inf
-    where name LIKE BINARY concat(concat('%',#{name}),'%')
+    where
+    1=1
+    <if test="name!=null">
+      AND name LIKE BINARY concat('%',#{name},'%')
+    </if>
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteById" parameterType="java.lang.Integer" >
     delete from dept_inf
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="cn.springmvc.model.Dept" >
     insert into dept_inf (id, name, remark
       )
@@ -60,7 +66,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.springmvc.model.Dept" >
+
+  <update id="updateDept" parameterType="cn.springmvc.model.Dept" >
     update dept_inf
     <set >
       <if test="name != null" >
@@ -72,6 +79,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="cn.springmvc.model.Dept" >
     update dept_inf
     set name = #{name,jdbcType=VARCHAR},

@@ -23,6 +23,11 @@
 	<script src="${ctx}/js/ligerUI/js/plugins/ligerResizable.jss" type="text/javascript"></script>
 	<link href="${ctx}/css/pager.css" type="text/css" rel="stylesheet" />
 	<script type="text/javascript">
+
+        function queryAll(pageNum, pageSize) {
+            window.location.href='/dept/selectDept?page=' + pageNum + '&pageSize=' + pageSize;
+        }
+
 		$(function(){
 	 	   /** 获取上一次选中的部门数据 */
 	 	   var boxs  = $("input[type='checkbox'][id^='box_']");
@@ -111,7 +116,7 @@
 			  <td>详细信息</td>
 			  <td align="center">操作</td>
 			</tr>
-			<c:forEach items="${requestScope.depts}" var="dept" varStatus="stat">
+			<c:forEach items="${pagehelper.list}" var="dept" varStatus="stat">
 				<tr id="data_${stat.index}" align="center" class="main_trbg" onMouseOver="move(this);" onMouseOut="out(this);">
 					<td><input type="checkbox" id="box_${stat.index}" value="${dept.id}"></td>
 					 <td>${dept.name }</td>
@@ -126,12 +131,7 @@
 	  </tr>
 	  <!-- 分页标签 -->
 	  <tr valign="top"><td align="center" class="font3">
-	  	 <fkjava:pager
-	  	        pageIndex="${requestScope.pageModel.pageIndex}" 
-	  	        pageSize="${requestScope.pageModel.pageSize}" 
-	  	        recordCount="${requestScope.pageModel.recordCount}" 
-	  	        style="digg"
-	  	        submitUrl="${ctx}/dept/selectDept?pageIndex={0}"/>
+	  	 <%@ include file="/WEB-INF/jsp/pagehelper.jsp"%>
 	  </td></tr>
 	</table>
 	<div style="height:10px;"></div>

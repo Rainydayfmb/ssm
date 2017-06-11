@@ -53,7 +53,7 @@ public class DeptTest {
 
     @Test
     public void selectDeptByPageService(){
-        System.out.println(deptService.findDept("",1,4));
+        System.out.println(deptService.findDept(null,1,4));
 
     }
 }

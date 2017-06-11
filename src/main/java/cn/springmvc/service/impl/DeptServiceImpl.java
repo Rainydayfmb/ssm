@@ -21,11 +21,31 @@ public class DeptServiceImpl implements DeptService {
     @Resource
     private DeptMapper deptMapper;
 
-    public PageInfo<Dept> findDept(String name, int pageNum, int pageSize) {
+    public PageInfo<Dept> findDept(Dept dept, int pageNum, int pageSize) {
 
         PageHelper.startPage(pageNum,pageSize);
-        List<Dept> list=deptMapper.selectByPage(name);
+        List<Dept> list=deptMapper.selectByPage(dept.getName());
         PageInfo<Dept> pi=new PageInfo<Dept>(list);
         return pi;
+    }
+
+    @Override
+    public void removeUserById(Integer id) {
+        deptMapper.deleteById(id);
+    }
+
+    @Override
+    public Dept findDeptById(Integer id) {
+        return deptMapper.selectById(id);
+    }
+
+    @Override
+    public void updateDept(Dept dept) {
+        deptMapper.updateDept(dept);
+    }
+
+    @Override
+    public void addDept(Dept dept) {
+        deptMapper.insert(dept);
     }
 }
