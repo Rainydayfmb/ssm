@@ -11,4 +11,10 @@ public interface UserService {
 	User login(String loginname,String password);
 
 	PageInfo<User> findUser(String name, Integer status, int pageNum, int PageSize);
+
+	User findUserById(Integer id);
+
+	void modifyUser(User user);
+
+	void removeUserById(Integer id);
 }

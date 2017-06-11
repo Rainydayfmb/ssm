@@ -12,15 +12,17 @@ public interface UserMapper {
 
     int insertSelective(User record);
 
-    User selectByPrimaryKey(Integer id);
-
     int updateByPrimaryKeySelective(User record);
 
-    int updateByPrimaryKey(User record);
+    void updateUser(User user);
 
     User selectByLoginnameAndPassword(
             @Param("loginName") String loginname,
             @Param("passWord") String password);
 
     List<User> selectByPage(@Param("userName") String userName,@Param("status") Integer status);
+
+    User selectById(@Param("id") Integer id);
+
+    void deleteById(Integer id);
 }

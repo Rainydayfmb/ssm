@@ -51,11 +51,59 @@ public class UserController {
         System.out.println("user = " + user);
         PageInfo<User> p=null;
         page=page==null?1:page;
-        pageSize=pageSize==null?4:pageSize;
+        pageSize=pageSize==null?5:pageSize;
         p=userService.findUser(user.getUsername(),user.getStatus(),page,pageSize);
         map.put("users",p.getList());
         map.put("pagehelper",p);
         return "user/user";
 
+    }
+
+    /**
+     * @Author: feipeng
+     * @Description:
+     * @Param: * @param flag
+     * @param user
+     * @param mv
+     * @Date:22:15 2017/6/9
+     */
+    @RequestMapping(value="/user/updateUser")
+    public ModelAndView updateUser(String flag,@ModelAttribute User user,ModelAndView mv){
+        if(flag.equals("1")){
+            // 根据id查询用户
+            User target = userService.findUserById(user.getId());
+            // 设置Model数据
+            mv.addObject("user", target);
+            // 返回修改员工页面
+            mv.setViewName("user/showUpdateUser");
+        }else{
+            // 执行修改操作
+            userService.modifyUser(user);
+            // 设置客户端跳转到查询请求
+            mv.setViewName("redirect:/user/selectUser");
+        }
+        // 返回
+        return mv;
+    }
+    /**
+     * @Author: feipeng
+     * @Description:
+     * @param ids
+     * @param mv
+     * @Date:12:05 2017/6/11
+     */
+
+    @RequestMapping(value="/user/removeUser")
+    public ModelAndView removeUser(String ids, ModelAndView mv){
+        // 分解id字符串
+        String[] idArray = ids.split(",");
+        for(String id : idArray){
+            // 根据id删除员工
+            userService.removeUserById(Integer.parseInt(id));
+        }
+        // 设置客户端跳转到查询请求
+        mv.setViewName("redirect:/user/selectUser");
+        // 返回ModelAndView
+        return mv;
     }
 }

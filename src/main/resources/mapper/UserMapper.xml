@@ -11,14 +11,16 @@
       <arg column="userName" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
+
   <sql id="Base_Column_List" >
     id, loginName, passWord, status, createdDate, userName
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from user_inf
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </select>
 
   <select id="selectByLoginnameAndPassword" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -42,10 +44,11 @@
     </if>
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteById" parameterType="java.lang.Integer" >
     delete from user_inf
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="cn.springmvc.model.User" >
     insert into user_inf (id, loginName, passWord, 
       status, createdDate, userName
@@ -54,6 +57,7 @@
       #{status,jdbcType=INTEGER}, #{createddate,jdbcType=TIMESTAMP}, #{username,jdbcType=VARCHAR}
       )
   </insert>
+
   <insert id="insertSelective" parameterType="cn.springmvc.model.User" >
     insert into user_inf
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -97,6 +101,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="cn.springmvc.model.User" >
     update user_inf
     <set >
@@ -118,7 +123,8 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.springmvc.model.User" >
+
+  <update id="updateUser" parameterType="cn.springmvc.model.User" >
     update user_inf
     set loginName = #{loginname,jdbcType=VARCHAR},
       passWord = #{password,jdbcType=VARCHAR},

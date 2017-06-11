@@ -35,5 +35,20 @@ public class UserServiceImpl implements  UserService{
         PageInfo<User> pi=new PageInfo<User>(list);
         return pi;
     }
+
+    @Override
+    public User findUserById(Integer id) {
+        return userMapper.selectById(id);
+    }
+
+    @Override
+    public void modifyUser(User user) {
+        userMapper.updateUser(user);
+    }
+
+    @Override
+    public void removeUserById(Integer id) {
+        userMapper.deleteById(id);
+    }
 }
  
