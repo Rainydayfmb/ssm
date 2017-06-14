@@ -22,6 +22,11 @@
 	<script src="${ctx }/js/ligerUI/js/plugins/ligerDrag.js" type="text/javascript"></script>
 	<script src="${ctx }/js/ligerUI/js/plugins/ligerResizable.js" type="text/javascript"></script>
 	<script type="text/javascript">
+
+	    function queryAll(pageNum, pageSize) {
+            window.location.href='/document/selectDocument?page=' + pageNum + '&pageSize=' + pageSize;
+        }
+
 	    $(function(){
 	    	
 	    	var boxs = $("input[type='checkbox'][id^='box_']");
@@ -145,7 +150,7 @@
 			  <td>操作</td>
 			  <td>下载</td>
 			</tr>
-			<c:forEach items="${requestScope.documents}" var="document" varStatus="stat">
+			<c:forEach items="${pagehelper.list}" var="document" varStatus="stat">
 				<tr ondblclick="down(${document.id});"  class="main_trbg" align="center" id="data_${stat.index}">
 					<td><input type="checkbox" id="box_${stat.index}" value="${document.id}"></td>
 					 <td>${document.title }</td>
@@ -153,7 +158,7 @@
 					  	<f:formatDate value="${document.createDate}" 
 								type="date" dateStyle="long"/>
 					  </td>
-					  <td>${document.user.username }</td>
+					  <td>${document.userId }</td>
 					  <td>${document.remark }</td>
 					 <td align="center" width="40px;"><a href="${ctx }/document/updateDocument?flag=1&id=${document.id}">
 							<img title="修改" src="${ctx }/images/update.gif"/></a>
@@ -170,13 +175,7 @@
 	  </tr>
 	  <!-- 分页标签 -->
 	  <tr valign="top"><td align="center" class="font3">
-	  	   <fkjava:pager 
-	  	      pageIndex="${pageModel.pageIndex}" 
-	  	      pageSize="${pageModel.pageSize}" 
-	  	      recordCount="${pageModel.recordCount}" 
-	  	      submitUrl="${ctx}/document/selectDocument.action?pageModel.pageIndex={0}&document.title=${document.title}"
-	  	      style="flickr"
-	  	      />
+	  	     <%@ include file="/WEB-INF/jsp/pagehelper.jsp"%>
 	  </td></tr>
 	</table>
 	<div style="height:10px;"></div>

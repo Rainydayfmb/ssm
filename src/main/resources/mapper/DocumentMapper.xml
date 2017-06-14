@@ -24,6 +24,18 @@
     delete from document_inf
     where ID = #{id,jdbcType=INTEGER}
   </delete>
+
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from document_inf
+    where
+    1=1
+    <if test="fileName!=null">
+      AND fileName LIKE BINARY concat('%',#{fileName},'%')
+    </if>
+  </select>
+
   <insert id="insert" parameterType="cn.springmvc.model.Document" >
     insert into document_inf (ID, TITLE, filename, 
       REMARK, CREATE_DATE, USER_ID

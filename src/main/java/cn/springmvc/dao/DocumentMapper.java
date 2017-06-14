@@ -1,6 +1,9 @@
 package cn.springmvc.dao;
 
 import cn.springmvc.model.Document;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface DocumentMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +17,6 @@ public interface DocumentMapper {
     int updateByPrimaryKeySelective(Document record);
 
     int updateByPrimaryKey(Document record);
+
+    List<Document> selectByPage(@Param("fileName") String userName);
 }
